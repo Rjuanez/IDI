@@ -8,6 +8,9 @@ class MyGLWidget : public LL2GLWidget {
   public:
     MyGLWidget(QWidget *parent=0) : LL2GLWidget(parent) {}
     ~MyGLWidget();
+    
+  protected:
+    virtual void paintGL ( );
 
   private:
     int printOglError(const char file[], int line, const char func[]);

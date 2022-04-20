@@ -49,3 +49,34 @@ MyGLWidget::~MyGLWidget()
 {
 
 }
+
+void MyGLWidget::paintGL ()
+{
+  // descomentar per canviar paràmetres
+  // glViewport (0, 0, ample, alt);
+
+  // Esborrem el frame-buffer
+  glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Patricio
+  glBindVertexArray (VAO_Patr);
+  patrTransform();
+  glDrawArrays(GL_TRIANGLES, 0, patr.faces().size()*3);
+
+  // Pilota
+  glBindVertexArray (VAO_Pil);
+  pilTransform();
+  glDrawArrays(GL_TRIANGLES, 0, pil.faces().size()*3);
+
+  // Cub
+  glBindVertexArray (VAO_Cub);
+  identTransform();
+  glDrawArrays(GL_TRIANGLES, 0, 36);
+
+  // Terra
+  glBindVertexArray (VAO_Terra);
+  identTransform();
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+  glBindVertexArray (0);
+}
