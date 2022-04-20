@@ -91,6 +91,12 @@ void MyGLWidget::transformParet(int i){
     TG = glm::scale(TG, glm::vec3(20, 2, 0.2));
     glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
+void MyGLWidget::transformParet2(){
+    glm::mat4 TG(1.0f);
+    TG = glm::translate(TG, glm::vec3(-9.9, 0, 0));
+    TG = glm::scale(TG, glm::vec3(0.2, 2, 14));
+    glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+}
 
 void MyGLWidget::patrTransform ()
 {
