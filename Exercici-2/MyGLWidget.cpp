@@ -70,12 +70,12 @@ void MyGLWidget::paintGL ()
 
   // Cub
   glBindVertexArray (VAO_Cub);
-  identTransform();
+  transformParet1();
   glDrawArrays(GL_TRIANGLES, 0, 36);
 
   // Terra
   glBindVertexArray (VAO_Terra);
-  transformParet1();
+  identTransform();
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
   glBindVertexArray (0);
