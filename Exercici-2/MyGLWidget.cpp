@@ -119,8 +119,8 @@ void MyGLWidget::iniCamera(){
   up = glm::vec3(0, 1, 0);
   fov = float(M_PI)/4.0f;
   ra  = 1.0;
-  znear =  25;
-  zfar  = 45;
+  znear =  20;
+  zfar  = 40;
 
   viewTransform();
   projectTransform();
@@ -129,7 +129,7 @@ void MyGLWidget::iniCamera(){
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -35));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, -30));
     View = glm::rotate(View, 45.0f, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
     View = glm::translate(View, -vrp);
