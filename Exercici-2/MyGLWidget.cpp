@@ -70,9 +70,9 @@ void MyGLWidget::paintGL ()
 
   // Cub
   glBindVertexArray (VAO_Cub);
-  transformParet1(0);
+  transformParet(0);
   glDrawArrays(GL_TRIANGLES, 0, 36);
-  transformParet1(1);
+  transformParet(1);
   glDrawArrays(GL_TRIANGLES, 0, 36);
 
   // Terra
