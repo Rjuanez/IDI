@@ -103,7 +103,7 @@ void MyGLWidget::transformParet2(){
 void MyGLWidget::patrTransform ()
 {
   glm::mat4 TG(1.0f);
-  TG = glm::translate(TG, -posPorter);
+  TG = glm::translate(TG, posPorter);
   //    TG = glm::scale(TG, glm::vec3(1/escalaPatr, 1/escalaPatr, 1/escalaPatr));
   TG = glm::translate(TG, -centreBasePatr);
   glUniformMatrix4fv(transLoc, 1, GL_FALSE, &TG[0][0]);
