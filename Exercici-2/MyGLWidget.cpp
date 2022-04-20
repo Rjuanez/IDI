@@ -117,7 +117,7 @@ void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
     View = glm::translate(View, glm::vec3(0.0, 0.0, -20));
-    View = glm::rotate(View, 0.0f, glm::vec3(1, 0, 0));
+    View = glm::rotate(View, 45.0f, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
     View = glm::translate(View, -centreBasePatr);
     
