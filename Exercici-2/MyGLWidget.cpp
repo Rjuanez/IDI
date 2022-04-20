@@ -118,8 +118,8 @@ void MyGLWidget::iniCamera(){
   up = glm::vec3(0, 1, 0);
   fov = float(M_PI)/4.0f;
   ra  = 1.0;
-  znear =  10;
-  zfar  = 30;
+  znear =  20;
+  zfar  = 40;
 
   viewTransform();
   projectTransform();
