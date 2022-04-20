@@ -111,12 +111,24 @@ void MyGLWidget::patrTransform ()
 void MyGLWidget::calcularAlcadaPatr () {
     
 }
+void MyGLWidget::iniCamera(){
 
+  obs = glm::vec3(14, 4, 14);
+  vrp = glm::vec3(0, 0, 0);
+  up = glm::vec3(0, 1, 0);
+  fov = float(M_PI)/4.0f;
+  ra  = 1.0;
+  znear =  10;
+  zfar  = 30;
+
+  viewTransform();
+  projectTransform();
+}
 
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -20));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, 0));
     View = glm::rotate(View, 45.0f, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
     View = glm::translate(View, -centreBasePatr);
