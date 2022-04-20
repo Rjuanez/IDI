@@ -111,3 +111,15 @@ void MyGLWidget::patrTransform ()
 void MyGLWidget::calcularAlcadaPatr () {
     
 }
+
+
+void MyGLWidget::viewTransform () {
+   glm::mat4 View(1.0f);
+   //   View = glm::lookAt (obs, vrp, up);
+    View = glm::translate(VM, glm::vec3(0.0, 0.0, -20));
+    View = glm::rotate(VM, fAngleX, glm::vec3(1, 0, 0));
+    View = glm::rotate(VM, fAngleY, glm::vec3(0, 1, 0));
+    View = glm::translate(VM, -centreBasePatr);
+    
+   glUniformMatrix4fv (viewLoc, 1, GL_FALSE, &View[0][0]);
+}
