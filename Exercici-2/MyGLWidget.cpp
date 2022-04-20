@@ -105,7 +105,7 @@ void MyGLWidget::patrTransform ()
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG, posPorter);
   //    TG = glm::scale(TG, glm::vec3(1/escalaPatr, 1/escalaPatr, 1/escalaPatr));
-    TG = glm::rotate(TG, -90.0f, glm::vec3(0, 1, 0));
+    TG = glm::rotate(TG, 90.0f, glm::vec3(0, 1, 0));
   TG = glm::translate(TG, -centreBasePatr);
   glUniformMatrix4fv(transLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -119,8 +119,8 @@ void MyGLWidget::iniCamera(){
   up = glm::vec3(0, 1, 0);
   fov = float(M_PI)/4.0f;
   ra  = 1.0;
-  znear =  20;
-  zfar  = 40;
+  znear =  10;
+  zfar  = 30;
 
   viewTransform();
   projectTransform();
@@ -129,7 +129,7 @@ void MyGLWidget::iniCamera(){
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -30));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, -20));
     View = glm::rotate(View, 45.0f, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
     View = glm::translate(View, -vrp);
