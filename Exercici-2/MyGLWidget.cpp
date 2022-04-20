@@ -74,7 +74,9 @@ void MyGLWidget::paintGL ()
   glDrawArrays(GL_TRIANGLES, 0, 36);
   transformParet(1);
   glDrawArrays(GL_TRIANGLES, 0, 36);
-
+  transformParet2();
+  glDrawArrays(GL_TRIANGLES, 0, 36);
+    
   // Terra
   glBindVertexArray (VAO_Terra);
   identTransform();
