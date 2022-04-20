@@ -75,7 +75,7 @@ void MyGLWidget::paintGL ()
 
   // Terra
   glBindVertexArray (VAO_Terra);
-  identTransform();
+  transformParet1();
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
   glBindVertexArray (0);
@@ -83,7 +83,7 @@ void MyGLWidget::paintGL ()
 
 void MyGLWidget::transformParet1(){
     glm::mat4 TG(1.0f);
-    TG = glm::translate(TG, glm::vec3(0, 0, -6.9    ));
+    TG = glm::translate(TG, glm::vec3(0, 0, -6.9));
     TG = glm::scale(TG, glm::vec3(20, 2, 0.2));
     glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
