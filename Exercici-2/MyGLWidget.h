@@ -11,7 +11,10 @@ class MyGLWidget : public LL2GLWidget {
     
   protected:
     virtual void paintGL ( );
+    
+    virtual void patrTransform();
 
   private:
     int printOglError(const char file[], int line, const char func[]);
+    void transformParet1();
 };
