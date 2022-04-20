@@ -83,8 +83,8 @@ void MyGLWidget::paintGL ()
 
 void MyGLWidget::transformParet1(){
     glm::mat4 TG(1.0f);
-    TG = glm::translate(TG, posPorter);
-    TG = glm::scale(TG, glm::vec3(altPorter/escalaPatr, altPorter/escalaPatr, altPorter/escalaPatr));
+    TG = glm::translate(TG, glm::vec3(0, 0, -6.9    ));
+    TG = glm::scale(TG, glm::vec3(20, 2, 0.2));
     glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
 
