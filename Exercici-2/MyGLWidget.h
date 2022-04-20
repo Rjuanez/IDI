@@ -18,4 +18,5 @@ class MyGLWidget : public LL2GLWidget {
     int printOglError(const char file[], int line, const char func[]);
     void transformParet(int i);
     void transformParet2();
+    void calcularAlcadaPatr();
 };

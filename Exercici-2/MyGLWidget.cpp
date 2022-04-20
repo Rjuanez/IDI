@@ -108,3 +108,6 @@ void MyGLWidget::patrTransform ()
   TG = glm::translate(TG, -centreBasePatr);
   glUniformMatrix4fv(transLoc, 1, GL_FALSE, &TG[0][0]);
 }
+void MyGLWidget::calcularAlcadaPatr () {
+    
+}
