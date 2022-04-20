@@ -16,5 +16,6 @@ class MyGLWidget : public LL2GLWidget {
 
   private:
     int printOglError(const char file[], int line, const char func[]);
-    void transformParet1();
+    void transformParet(int i);
+    void transformParet2();
 };

@@ -70,7 +70,9 @@ void MyGLWidget::paintGL ()
 
   // Cub
   glBindVertexArray (VAO_Cub);
-  transformParet1();
+  transformParet1(0);
+  glDrawArrays(GL_TRIANGLES, 0, 36);
+  transformParet1(1);
   glDrawArrays(GL_TRIANGLES, 0, 36);
 
   // Terra
@@ -81,9 +83,11 @@ void MyGLWidget::paintGL ()
   glBindVertexArray (0);
 }
 
-void MyGLWidget::transformParet1(){
+void MyGLWidget::transformParet(int i){
     glm::mat4 TG(1.0f);
-    TG = glm::translate(TG, glm::vec3(0, 0, -6.9));
+    if ( i == 0)TG = glm::translate(TG, glm::vec3(0, 0, -6.9));
+    else TG = glm::translate(TG, glm::vec3(0, 0, 6.9));
+    
     TG = glm::scale(TG, glm::vec3(20, 2, 0.2));
     glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
 }
