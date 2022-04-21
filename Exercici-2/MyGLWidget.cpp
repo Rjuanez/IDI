@@ -104,8 +104,8 @@ void MyGLWidget::patrTransform ()
 {
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG, posPorter);
-  //    TG = glm::scale(TG, glm::vec3(1/escalaPatr, 1/escalaPatr, 1/escalaPatr));
-    TG = glm::rotate(TG, 90.0f, glm::vec3(0, 1, 0));
+  TG = glm::scale(TG, glm::vec3(altPorter*escalaPatr, altPorter*escalaPatr, altPorter*escalaPatr));
+  TG = glm::rotate(TG, float(M_PI)/2, glm::vec3(0, 1, 0));
   TG = glm::translate(TG, -centreBasePatr);
   glUniformMatrix4fv(transLoc, 1, GL_FALSE, &TG[0][0]);
 }
@@ -126,11 +126,24 @@ void MyGLWidget::iniCamera(){
   projectTransform();
 }
 
+void MyGLWidget::iniEscena()
+{
+  escenaMinima = glm::vec3(-10,0,-7);
+  escenaMaxima = glm::vec3(10,altPorter,7);
+  radiEscena = distance(escenaMinima,escenaMaxima)/2.0;
+  centreEscena = glm::vec3(0,altPorter/2,0);
+
+  altPorter = 4;
+  posPorter = glm::vec3(9.0, 0.0, 0.0);  // posició inicial del porter
+  posPilota = glm::vec3(7.0, 0.0, 0.0);  // posició inicial de la pilota
+  dirInicialPilota();    // direcció inicial de la pilota
+}
+
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -20));
-    View = glm::rotate(View, 45.0f, glm::vec3(1, 0, 0));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, -radiEscena*2));
+    View = glm::rotate(View, float(M_PI)/4, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
     View = glm::translate(View, -vrp);
     
