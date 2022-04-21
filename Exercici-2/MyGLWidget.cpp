@@ -209,6 +209,8 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
     }
     case Qt::Key_C: { //
         presp = not presp;
+        projectTransform();
+        viewTransform();
       break;
     }
     default: event->ignore(); break;
