@@ -170,3 +170,29 @@ void MyGLWidget::rebotaParets()
     if (posPilota[2]-0.5 <=-6.5 or posPilota[2]+0.5 >=6.5) dirPilota[2] *= -1;
     if (posPilota[0]-0.5 <= -9.5) dirPilota[0] *= -1;
 }
+
+void MyGLWidget::keyPressEvent(QKeyEvent* event)
+{
+  makeCurrent();
+  switch (event->key()) {
+    case Qt::Key_Up: { // moviment de la pilota
+      if (posPilota[0] == 7.0)
+        mourePilota ();
+      break;
+    }
+    case Qt::Key_I: { // reinicia posició pilota
+      iniciPilota ();
+      break;
+    }
+    case Qt::Key_Right: { // reinicia posició pilota
+      if (posPorter[2] > -(7-(altPorter/2))) posPorter[2] -= 0.5;
+      break;
+    }
+    case Qt::Key_Left: { // reinicia posició pilota
+      if (posPorter[2] < (7-(altPorter/2))) posPorter[2] += 0.5;
+      break;
+    }
+    default: event->ignore(); break;
+  }
+  update();
+}
