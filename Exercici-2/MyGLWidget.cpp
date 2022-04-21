@@ -239,7 +239,14 @@ void MyGLWidget::tractamentGol()
 void MyGLWidget::projectTransform ()
 {
   glm::mat4 Proj(1.0f);
-  if (presp)Proj = glm::perspective (fov, ra, znear, zfar);
-  else Proj = glm::ortho(-radiEscena, radiEscena, -radiEscena, radiEscena, znear, zfar);
+  if (presp) {
+      if (ra < 1) fov = 2.0*atan(tan(fov/2.0)/ra);
+      Proj = glm::perspective (fov, ra, znear, zfar);
+  }
+  else {
+      if (ra < 1) Proj = glm::ortho(-radiEscena, radiEscena, -radiEscena/ra, radiEscena/ra, znear, zfar);
+      else Proj = glm::ortho(-radiEscena*ra, radiEscena*ra, -radiEscena, radiEscena, znear, zfar);
+  }
+   
   glUniformMatrix4fv (projLoc, 1, GL_FALSE, &Proj[0][0]);
 }
