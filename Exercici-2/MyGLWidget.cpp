@@ -240,7 +240,10 @@ void MyGLWidget::projectTransform ()
 {
   glm::mat4 Proj(1.0f);
   if (presp) {
-      if (ra < 1) fov = 2.0*atan(tan(fov/2.0)/ra);
+      if (ra < 1){
+          fov = 2.0*asin(radiEscena/distancia);
+          fov = 2.0*atan(tan(fov/2.0)/ra);
+      }
       Proj = glm::perspective (fov, ra, znear, zfar);
   }
   else {
