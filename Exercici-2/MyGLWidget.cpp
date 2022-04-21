@@ -160,8 +160,8 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 {
   makeCurrent();
     
-    factorAngleX += float(e->x() - xClick)/150.0;
-    factorAngleY += float(e->y() - yClick)/150.0;
+  factorAngleX += float(e->x() - xClick)/150.0;
+  factorAngleY += float(e->y() - yClick)/150.0;
 
   xClick = e->x();
   yClick = e->y();
@@ -211,6 +211,19 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
         presp = not presp;
         projectTransform();
         viewTransform();
+      break;
+    }
+    case Qt::Key_W: { //
+        if (altPorter < 6) ++altPorter;
+      break;
+    }
+    case Qt::Key_S: { //
+        if (altPorter > 2) --altPorter;
+      break;
+    }
+    case Qt::Key_R: { //
+        initializeGL();
+        iniciPilota();
       break;
     }
     default: event->ignore(); break;
