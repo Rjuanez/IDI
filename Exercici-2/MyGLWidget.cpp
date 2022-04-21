@@ -167,6 +167,6 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 void MyGLWidget::rebotaParets()
 {
     //pared -6.9, 6.9
-    if (posPilota[2]-0.5 <=-6.8 or posPilota[2]+0.5 >=6.8) dirPilota[2] *= -1;
-    else if (posPilota[0]-0.5 <= -9.5) dirPilota[0] *= -1;
+    if (posPilota[2]-0.5 <=-6.5 or posPilota[2]+0.5 >=6.5) dirPilota[2] *= -1;
+    if (posPilota[0]-0.5 <= -9.5) dirPilota[0] *= -1;
 }
