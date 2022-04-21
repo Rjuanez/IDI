@@ -105,7 +105,7 @@ void MyGLWidget::patrTransform ()
   glm::mat4 TG(1.0f);
   TG = glm::translate(TG, posPorter);
   TG = glm::scale(TG, glm::vec3(altPorter*escalaPatr, altPorter*escalaPatr, altPorter*escalaPatr));
-  TG = glm::rotate(TG, float(M_PI)/2, glm::vec3(0, 1, 0));
+  TG = glm::rotate(TG, -float(M_PI)/2, glm::vec3(0, 1, 0));
   TG = glm::translate(TG, -centreBasePatr);
   glUniformMatrix4fv(transLoc, 1, GL_FALSE, &TG[0][0]);
 }
