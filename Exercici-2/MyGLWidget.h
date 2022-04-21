@@ -20,6 +20,7 @@ class MyGLWidget : public LL2GLWidget {
     virtual void rebotaParets ();
     virtual void keyPressEvent (QKeyEvent *event);
     virtual void tractamentGol ();
+    virtual void projectTransform ();
     
     
 
@@ -29,5 +30,5 @@ class MyGLWidget : public LL2GLWidget {
     void transformParet2();
     glm::vec3 escenaMaxima, escenaMinima;
     float distancia;
-    bool gol;
+    bool gol, presp;
 };

@@ -128,7 +128,8 @@ void MyGLWidget::iniCamera(){
 
 void MyGLWidget::iniEscena()
 {
-    gol = false;
+  presp = true;
+  gol = false;
   escenaMinima = glm::vec3(-10,0,-7);
   escenaMaxima = glm::vec3(10,altPorter,7);
   radiEscena = distance(escenaMinima,escenaMaxima)/2.0;
@@ -143,12 +144,15 @@ void MyGLWidget::iniEscena()
 
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
-   //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -(distancia)));
-    View = glm::rotate(View, float(M_PI)/4+factorAngleY, glm::vec3(1, 0, 0));
-    View = glm::rotate(View, 0.0f+factorAngleX, glm::vec3(0, 1, 0));
-    View = glm::translate(View, -centreEscena);
-    
+    if (presp) {
+        View = glm::translate(View, glm::vec3(0.0, 0.0, -(distancia)));
+        View = glm::rotate(View, float(M_PI)/4+factorAngleY, glm::vec3(1, 0, 0));
+        View = glm::rotate(View, 0.0f+factorAngleX, glm::vec3(0, 1, 0));
+        View = glm::translate(View, -centreEscena);
+    }
+    else {
+        View = glm::lookAt (obs, vrp, up);
+    }
    glUniformMatrix4fv (viewLoc, 1, GL_FALSE, &View[0][0]);
 }
 
@@ -195,12 +199,16 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
       gol = false;
       break;
     }
-    case Qt::Key_Right: { // reinicia posició pilota
+    case Qt::Key_Right: { //
       if (posPorter[2] > -(7-(altPorter/2))) posPorter[2] -= 0.7;
       break;
     }
-    case Qt::Key_Left: { // reinicia posició pilota
+    case Qt::Key_Left: { //
       if (posPorter[2] < (7-(altPorter/2))) posPorter[2] += 0.7;
+      break;
+    }
+    case Qt::Key_C { //
+        presp = not presp;
       break;
     }
     default: event->ignore(); break;
@@ -212,4 +220,11 @@ void MyGLWidget::tractamentGol()
 {
     gol = true;
   timer.stop();
+}
+void MyGLWidget::projectTransform ()
+{
+  glm::mat4 Proj(1.0f);
+  if (presp)Proj = glm::perspective (fov, ra, znear, zfar);
+  else Proj = glm::ortho(-radiEscena, radiEscena, -radiEscena, radiEscena, znear, zfar);
+  glUniformMatrix4fv (projLoc, 1, GL_FALSE, &Proj[0][0]);
 }
