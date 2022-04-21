@@ -188,11 +188,11 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Up: { // moviment de la pilota
       if (posPilota[0] == 7.0)
         mourePilota ();
-        gol = false;
       break;
     }
     case Qt::Key_I: { // reinicia posició pilota
       iniciPilota ();
+      gol = false;
       break;
     }
     case Qt::Key_Right: { // reinicia posició pilota
