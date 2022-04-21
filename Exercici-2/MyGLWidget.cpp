@@ -144,9 +144,39 @@ void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
     View = glm::translate(View, glm::vec3(0.0, 0.0, -distancia));
-    View = glm::rotate(View, float(M_PI)/4, glm::vec3(1, 0, 0));
-    View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
+    View = glm::rotate(View, float(M_PI)/4+factorAngleY, glm::vec3(1, 0, 0));
+    View = glm::rotate(View, 0.0f+factorAngleX, glm::vec3(0, 1, 0));
     View = glm::translate(View, -centreEscena);
     
    glUniformMatrix4fv (viewLoc, 1, GL_FALSE, &View[0][0]);
 }
+
+void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
+{
+  makeCurrent();
+    
+  factorAngleX = e->x() - xClick;
+  factorAngleY = e->y() - yClick;
+
+  xClick = e->x();
+  yClick = e->y();
+  viewTransform();
+
+  update ();
+}
+/*
+void MyGLWidget::mouseMoveEvent(QMouseEvent *e) {
+    makeCurrent();
+    
+    if(e->x() > x_ant) girPsi -= 0.03;
+    else if(e->x() < x_ant) girPsi += 0.03;
+    
+    if(e->y() > y_ant) girTheta -= 0.03;
+    else if(e->y() < y_ant) girTheta += 0.03;
+    
+    x_ant = e->x();
+    y_ant = e->y();
+    viewTransform();
+    update();
+}
+ */
