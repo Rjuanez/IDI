@@ -155,8 +155,8 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 {
   makeCurrent();
     
-    factorAngleX += float(e->x() - xClick)/10.0;
-    factorAngleY += float(e->y() - yClick)/10.0;
+    factorAngleX += float(e->x() - xClick)/20.0;
+    factorAngleY += float(e->y() - yClick)/20.0;
 
   xClick = e->x();
   yClick = e->y();
@@ -164,19 +164,3 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 
   update ();
 }
-/*
-void MyGLWidget::mouseMoveEvent(QMouseEvent *e) {
-    makeCurrent();
-    
-    if(e->x() > x_ant) girPsi -= 0.03;
-    else if(e->x() < x_ant) girPsi += 0.03;
-    
-    if(e->y() > y_ant) girTheta -= 0.03;
-    else if(e->y() < y_ant) girTheta += 0.03;
-    
-    x_ant = e->x();
-    y_ant = e->y();
-    viewTransform();
-    update();
-}
- */
