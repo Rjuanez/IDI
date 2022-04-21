@@ -131,7 +131,7 @@ void MyGLWidget::iniEscena()
   escenaMinima = glm::vec3(-10,0,-7);
   escenaMaxima = glm::vec3(10,altPorter,7);
   radiEscena = distance(escenaMinima,escenaMaxima)/2.0;
-  centreEscena = glm::vec3(0,altPorter/2.0,0);
+  centreEscena = glm::vec3(0,0,0);
     distancia = radiEscena*2.0;
 
   altPorter = 4;
@@ -143,7 +143,7 @@ void MyGLWidget::iniEscena()
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -(distancia+2)));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, -(distancia)));
     View = glm::rotate(View, float(M_PI)/4+factorAngleY, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f+factorAngleX, glm::vec3(0, 1, 0));
     View = glm::translate(View, -centreEscena);
