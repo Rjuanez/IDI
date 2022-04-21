@@ -64,9 +64,11 @@ void MyGLWidget::paintGL ()
   glDrawArrays(GL_TRIANGLES, 0, patr.faces().size()*3);
 
   // Pilota
-  glBindVertexArray (VAO_Pil);
-  pilTransform();
-  glDrawArrays(GL_TRIANGLES, 0, pil.faces().size()*3);
+  if (not gol) {
+      glBindVertexArray (VAO_Pil);
+      pilTransform();
+      glDrawArrays(GL_TRIANGLES, 0, pil.faces().size()*3);
+  }
 
   // Cub
   glBindVertexArray (VAO_Cub);
@@ -109,9 +111,7 @@ void MyGLWidget::patrTransform ()
   TG = glm::translate(TG, -centreBasePatr);
   glUniformMatrix4fv(transLoc, 1, GL_FALSE, &TG[0][0]);
 }
-void MyGLWidget::calcularAlcadaPatr () {
-    
-}
+
 void MyGLWidget::iniCamera(){
   
   obs = glm::vec3(14, 4, 14);
@@ -128,11 +128,12 @@ void MyGLWidget::iniCamera(){
 
 void MyGLWidget::iniEscena()
 {
+    gol = false;
   escenaMinima = glm::vec3(-10,0,-7);
   escenaMaxima = glm::vec3(10,altPorter,7);
   radiEscena = distance(escenaMinima,escenaMaxima)/2.0;
   centreEscena = glm::vec3(0,0,0);
-    distancia = radiEscena*2.0;
+  distancia = radiEscena*2.0;
 
   altPorter = 4;
   posPorter = glm::vec3(9.0, 0.0, 0.0);  // posició inicial del porter
@@ -187,6 +188,7 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Up: { // moviment de la pilota
       if (posPilota[0] == 7.0)
         mourePilota ();
+        gol = false;
       break;
     }
     case Qt::Key_I: { // reinicia posició pilota
@@ -204,4 +206,10 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
     default: event->ignore(); break;
   }
   update();
+}
+
+void MyGLWidget::tractamentGol()
+{
+    gol = true;
+  timer.stop();
 }
