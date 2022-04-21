@@ -18,6 +18,7 @@ class MyGLWidget : public LL2GLWidget {
     virtual void viewTransform ();
     virtual void mouseMoveEvent (QMouseEvent *event);
     virtual void rebotaParets ();
+    virtual void keyPressEvent (QKeyEvent *event);
     
     
 
