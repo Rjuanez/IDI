@@ -155,8 +155,8 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 {
   makeCurrent();
     
-    factorAngleX += float(e->x() - xClick)/100.0;
-    factorAngleY += float(e->y() - yClick)/100.0;
+    factorAngleX += float(e->x() - xClick)/150.0;
+    factorAngleY += float(e->y() - yClick)/150.0;
 
   xClick = e->x();
   yClick = e->y();
