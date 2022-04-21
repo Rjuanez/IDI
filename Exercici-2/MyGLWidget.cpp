@@ -113,14 +113,14 @@ void MyGLWidget::calcularAlcadaPatr () {
     
 }
 void MyGLWidget::iniCamera(){
-
+  
   obs = glm::vec3(14, 4, 14);
   vrp = glm::vec3(0, 0, 0);
   up = glm::vec3(0, 1, 0);
   fov = 2.0*atan(radiEscena/radiEscena*2);
   ra  = 1.0;
-  znear =  10;
-  zfar  = 30;
+  znear =  distancia - radiEscena;
+  zfar  = distancia + radiEscena;;
 
   viewTransform();
   projectTransform();
@@ -132,6 +132,7 @@ void MyGLWidget::iniEscena()
   escenaMaxima = glm::vec3(10,altPorter,7);
   radiEscena = distance(escenaMinima,escenaMaxima)/2.0;
   centreEscena = glm::vec3(0,altPorter/2.0,0);
+    distancia = radiEscena*2.0;
 
   altPorter = 4;
   posPorter = glm::vec3(9.0, 0.0, 0.0);  // posició inicial del porter

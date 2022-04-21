@@ -25,4 +25,5 @@ class MyGLWidget : public LL2GLWidget {
     void transformParet2();
     void calcularAlcadaPatr();
     glm::vec3 escenaMaxima, escenaMinima;
+    float distance;
 };
