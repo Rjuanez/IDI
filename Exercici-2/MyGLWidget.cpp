@@ -117,7 +117,7 @@ void MyGLWidget::iniCamera(){
   obs = glm::vec3(14, 4, 14);
   vrp = glm::vec3(0, 0, 0);
   up = glm::vec3(0, 1, 0);
-  fov = float(M_PI)/4.0f;
+    fov = 2.0*asin(radiEscena/radiEscena*2);
   ra  = 1.0;
   znear =  10;
   zfar  = 30;
