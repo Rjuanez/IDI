@@ -207,7 +207,7 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
       if (posPorter[2] < (7-(altPorter/2))) posPorter[2] += 0.7;
       break;
     }
-    case Qt::Key_C { //
+    case Qt::Key_C: { //
         presp = not presp;
       break;
     }
