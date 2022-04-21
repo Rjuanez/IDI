@@ -194,11 +194,11 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event)
       break;
     }
     case Qt::Key_Right: { // reinicia posició pilota
-      if (posPorter[2] > -(7-(altPorter/2))) posPorter[2] -= 0.5;
+      if (posPorter[2] > -(7-(altPorter/2))) posPorter[2] -= 0.7;
       break;
     }
     case Qt::Key_Left: { // reinicia posició pilota
-      if (posPorter[2] < (7-(altPorter/2))) posPorter[2] += 0.5;
+      if (posPorter[2] < (7-(altPorter/2))) posPorter[2] += 0.7;
       break;
     }
     default: event->ignore(); break;
