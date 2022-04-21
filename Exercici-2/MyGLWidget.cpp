@@ -131,7 +131,7 @@ void MyGLWidget::iniEscena()
   escenaMinima = glm::vec3(-10,0,-7);
   escenaMaxima = glm::vec3(10,altPorter,7);
   radiEscena = distance(escenaMinima,escenaMaxima)/2.0;
-  centreEscena = glm::vec3(0,altPorter/2,0);
+  centreEscena = glm::vec3(0,altPorter/2.0,0);
 
   altPorter = 4;
   posPorter = glm::vec3(9.0, 0.0, 0.0);  // posició inicial del porter
@@ -145,7 +145,7 @@ void MyGLWidget::viewTransform () {
     View = glm::translate(View, glm::vec3(0.0, 0.0, -radiEscena*2));
     View = glm::rotate(View, float(M_PI)/4, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
-    View = glm::translate(View, -vrp);
+    View = glm::translate(View, -centreEscena);
     
    glUniformMatrix4fv (viewLoc, 1, GL_FALSE, &View[0][0]);
 }
