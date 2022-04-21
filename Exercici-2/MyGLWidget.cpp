@@ -115,7 +115,7 @@ void MyGLWidget::calcularAlcadaPatr () {
 void MyGLWidget::iniCamera(){
   
   obs = glm::vec3(14, 4, 14);
-  vrp = glm::vec3(0, 0, 0);
+  vrp = glm::vec3(0, 2, 0);
   up = glm::vec3(0, 1, 0);
   fov = 2.0*asin(radiEscena/distancia);
   ra  = 1.0;
@@ -143,7 +143,7 @@ void MyGLWidget::iniEscena()
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -radiEscena*2));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, -distancia));
     View = glm::rotate(View, float(M_PI)/4, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f, glm::vec3(0, 1, 0));
     View = glm::translate(View, -centreEscena);
