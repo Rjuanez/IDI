@@ -143,7 +143,7 @@ void MyGLWidget::iniEscena()
 void MyGLWidget::viewTransform () {
    glm::mat4 View(1.0f);
    //   View = glm::lookAt (obs, vrp, up);
-    View = glm::translate(View, glm::vec3(0.0, 0.0, -(distancia+2)));
+    View = glm::translate(View, glm::vec3(0.0, 0.0, -(distancia)));
     View = glm::rotate(View, float(M_PI)/4+factorAngleY, glm::vec3(1, 0, 0));
     View = glm::rotate(View, 0.0f+factorAngleX, glm::vec3(0, 1, 0));
     View = glm::translate(View, -centreEscena);
@@ -163,4 +163,9 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
   viewTransform();
 
   update ();
+}
+void MyGLWidget::rebotaParets()
+{
+    //pared -6.9, 6.9
+    if (posPilota[2]-0.5 <=-6.8 or posPilota[2]+0.5 >=6.8) posPilota[2] *= -1;
 }
