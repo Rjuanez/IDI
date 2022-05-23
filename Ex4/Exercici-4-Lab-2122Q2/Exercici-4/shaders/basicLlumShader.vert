@@ -22,12 +22,13 @@ out vec3  fnormal;
 
 void main()
 {	
-    fvertex = (View * TG * vec4(vertex,1.0)).xyz;
+    
 
     mat3 NormalMatrix = inverse(transpose(mat3(View * TG)));
     fnormal = ( NormalMatrix * normal);
 
-
+    fvertex = (View * TG * vec4(vertex,1.0)).xyz;
+    
     fmatamb  = matamb;
     fmatdiff = matdiff;
     fmatspec = matspec;

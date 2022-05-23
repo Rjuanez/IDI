@@ -1,14 +1,17 @@
 #version 330 core
 
-
+//Camara
 uniform vec3 posCamaraMagenta;
 uniform vec3 colCamaraMagenta;
+
+//Patricio
+uniform vec3 posFocoPatricio;
+uniform vec3 colFocoPatricio;
 
 uniform vec3 posFocoEscena;
 uniform vec3 colFocoEscena;
 
-uniform vec3 posFocoPatricio;
-uniform vec3 colFocoPatricio;
+
 
 
 in vec3  fmatamb;
@@ -80,14 +83,16 @@ void main()
       //Phong Camara
       vec3 PhongC =  Difus(NormSCO,Lcam,colCamaraMagenta ) + Especular (NormSCO,Lcam,fvertex,colCamaraMagenta);
 
+    //Phong Patricio
+    vec3 PhongP =  Difus(NormSCO,Lfoco2,colFocoPatricio ) + Especular (NormSCO,Lfoco2,fvertex,colFocoPatricio);
+    
     //Phong Escena
       vec3 PhongE =  Difus(NormSCO,Lfoco1,colFocoEscena ) + Especular (NormSCO,Lfoco1,fvertex,colFocoEscena);
 
-    //Phong Patricio
-      vec3 PhongP =  Difus(NormSCO,Lfoco2,colFocoPatricio ) + Especular (NormSCO,Lfoco2,fvertex,colFocoPatricio);
+    
 
       //Phong final:
-      vec3 Phong = Ambient() + PhongC + PhongE + PhongP;
+      vec3 Phong = Ambient() + PhongC + PhongP + PhongE;
 
       FragColor = vec4(Phong,1);
 }
