@@ -129,7 +129,6 @@ void MyGLWidget::initializeGL() {
     colFocoEscenaLoc = glGetUniformLocation (program->programId(), "colFocoEscena");
 
    
-
     centroGiro = glm::vec3 (5.0 , 3.0 , 5.0 );
     posCamara = glm::vec3 (0.0 , 0.0 , 0.0);
     posFocoE = glm::vec3 (10.0 , 3.0 , 5.0);
@@ -145,7 +144,6 @@ void MyGLWidget::initializeGL() {
 }
 void MyGLWidget::updateCamara() {
 
-    glm::vec3 posCamara = posCamara;
     glUniform3fv(posCamaraLoc, 1, &posCamara[0]);
     
     if(ctrlC) colCamara  = glm::vec3(0.9 , 0.0 , 0.9);
