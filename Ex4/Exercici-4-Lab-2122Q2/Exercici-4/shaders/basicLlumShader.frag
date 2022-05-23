@@ -1,14 +1,18 @@
 #version 330 core
 
 
-uniform vec3 posCamaraMagenta;
-uniform vec3 colCamaraMagenta;
+uniform vec3 posCamara;
+uniform vec3 colCamara;
 
-uniform vec3 posFocoEscena;
-uniform vec3 colFocoEscena;
+//Patricio
+uniform vec3 posFoco2;
+uniform vec3 colFoco2;
 
-uniform vec3 posFocoPatricio;
-uniform vec3 colFocoPatricio;
+//Escena
+uniform vec3 posFoco1;
+uniform vec3 colFoco1;
+
+
 
 
 in vec3  fmatamb;
@@ -63,31 +67,33 @@ vec3 Especular (vec3 NormSCO, vec3 L, vec3 vertSCO, vec3 colFocus)
 void main()
 {
     
-    vec3 L_cam_magenta = posCamaraMagenta - fvertex;
-      L_cam_magenta = normalize(L_cam_magenta);
+    vec3 Lcam = posCamara - fvertex;
+      Lcam = normalize(Lcam);
 
-      vec3 L_foco_escena = posFocoEscena - fvertex;
-      L_foco_escena = normalize(L_foco_escena);
+      vec3 Lfoco1 = posFoco1 - fvertex;
+      Lfoco1 = normalize(Lfoco1);
 
 
-    vec3 L_foco_pat = posFocoPatricio - fvertex;
-      L_foco_pat = normalize(L_foco_pat);
+    vec3 Lfoco2 = posFoco2 - fvertex;
+      Lfoco2 = normalize(Lfoco2);
 
 
 
     vec3 NormSCO = normalize(fnormal);
 
-      //Phong1
-      vec3 Phong1 =  Difus(NormSCO,L_cam_magenta,colCamaraMagenta ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamaraMagenta);
+      //Phong camara
+      vec3 PhongC =  Difus(NormSCO,Lcam,colCamara ) + Especular (NormSCO,Lcam,fvertex,colCamara);
+    
+    //Phong patricio
+    vec3 PhongP =  Difus(NormSCO,Lfoco2,colFoco2 ) + Especular (NormSCO,Lfoco2,fvertex,colFoco2);
+    
+    //Phong escena
+    vec3 PhongE =  Difus(NormSCO,Lfoco1,colFoco1 ) + Especular (NormSCO,Lfoco1,fvertex,colFoco1);
 
-    //Phong2
-      vec3 Phong2 =  Difus(NormSCO,L_foco_escena,colFocoEscena ) + Especular (NormSCO,L_foco_escena,fvertex,colFocoEscena);
-
-    //Phong3
-      vec3 Phong3 =  Difus(NormSCO,L_foco_pat,colFocoPatricio ) + Especular (NormSCO,L_foco_pat,fvertex,colFocoPatricio);
+    
 
       //Phong final:
-      vec3 Phong = Ambient() + Phong1 + Phong2 + Phong3;
+      vec3 Phong = Ambient() + PhongC + PhongP + PhongE;
 
       FragColor = vec4(Phong,1);
 }

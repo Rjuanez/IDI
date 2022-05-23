@@ -27,7 +27,7 @@ void main()
     mat3 NormalMatrix = inverse(transpose(mat3(View * TG)));
     fnormal = ( NormalMatrix * normal);
 
-    // Passem les dades al fragment shader
+
     fmatamb  = matamb;
     fmatdiff = matdiff;
     fmatspec = matspec;
