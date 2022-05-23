@@ -128,14 +128,16 @@ void MyGLWidget::initializeGL() {
     posFocoEscenaLoc = glGetUniformLocation (program->programId(), "posFocoEscena");
     colFocoEscenaLoc = glGetUniformLocation (program->programId(), "colFocoEscena");
 
-    ctrlC = ctrlP = ctrlE = true;
-    giro = 0;
+   
 
     centroGiro = glm::vec3 (5.0 , 3.0 , 5.0 );
     posCamara = glm::vec3 (0.0 , 0.0 , 0.0);
     posFocoE = glm::vec3 (10.0 , 3.0 , 5.0);
     posFocoP = glm::vec3 (5.0 , 3.0 , 2.0 );
-
+    
+    ctrlC = ctrlP = ctrlE = true;
+    giro = 0;
+    
     updateCamara();
     updateFocoE();
     updateFocoP();
