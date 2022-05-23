@@ -7,8 +7,7 @@
 #define CHECK() printOglError(__FILE__, __LINE__,__FUNCTION__)
 #define DEBUG() std::cout << __FILE__ << " " << __LINE__ << " " << __FUNCTION__ << std::endl;
 
-int MyGLWidget::printOglError(const char file[], int line, const char func[]) 
-{
+int MyGLWidget::printOglError(const char file[], int line, const char func[])  {
     GLenum glErr;
     int    retCode = 0;
 
@@ -49,8 +48,7 @@ int MyGLWidget::printOglError(const char file[], int line, const char func[])
 MyGLWidget::~MyGLWidget() {
 }
 
-void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
-{
+void MyGLWidget::mouseMoveEvent(QMouseEvent *e) {
   makeCurrent();
   // Aqui cal que es calculi i s'apliqui la rotacio o el zoom com s'escaigui...
   if (DoingInteractive == ROTATE)
@@ -67,128 +65,121 @@ void MyGLWidget::mouseMoveEvent(QMouseEvent *e)
 }
 
 void MyGLWidget::keyPressEvent(QKeyEvent* event) {
-  makeCurrent();
-  switch (event->key()) {
-  case Qt::Key_C: {
-      ctrlC = !ctrlC;
-      changeCamara();
-    break;
-  }
-  case Qt::Key_P: {
-    ctrlP = !ctrlP;
-    changeFocoP();
-  break;
-  }
-  case Qt::Key_E :{
-      ctrlE = !ctrlE;
-      changeFocoE();
+    makeCurrent();
+    switch (event->key()) {
+    case Qt::Key_C: {
+        ctrlC = !ctrlC;
+        updateCamara();
     break;
     }
-  
-  case Qt::Key_Right: {
-      giro -= glm::radians(45.0f);
-      modelTransformPatricio();
-      changeFocoP();
+    case Qt::Key_P: {
+        ctrlP = !ctrlP;
+        updateFocoP();
     break;
-	}
-  case Qt::Key_Left: {
-      giro += glm::radians(45.0f);
-      modelTransformPatricio();
-      changeFocoP();
+    }
+    case Qt::Key_E :{
+        ctrlE = !ctrlE;
+        updateFocoE();
     break;
-	}
-  default: LL4GLWidget::keyPressEvent(event); break;
-  }
-  update();
+    }
+    case Qt::Key_Right: {
+        giro -= glm::radians(45.0f);
+        modelTransformPatricio();
+        updateFocoP();
+    break;
+    }
+    case Qt::Key_Left: {
+        giro += glm::radians(45.0f);
+        modelTransformPatricio();
+        updateFocoP();
+    break;
+    }
+    default: LL4GLWidget::keyPressEvent(event); break;
+    }
+    update();
 }
 
-void MyGLWidget::modelTransformPatricio(){
-  glm::mat4 TG(1.0f);
-  TG = glm::translate(TG, glm::vec3(5,0,2));
-  TG = glm::translate(TG,glm::vec3(0.0 ,0.0 , 3.0 ));
-  TG = glm::rotate(TG, giro ,glm::vec3(0.0, 1.0, 0.0));
-  TG = glm::translate (TG, glm::vec3(0.0 , 0.0 , -3.0 ));
-  TG = glm::scale(TG, glm::vec3(escala, escala, escala));
-  TG = glm::translate(TG, -centreBasePatr);
-  glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
-}
-
-
-void MyGLWidget::initializeGL(){
-  LL4GLWidget::initializeGL();
-
-    posCamaraMagentaLoc = glGetUniformLocation (program->programId(), "posCamaraMagenta");
-    colCamaraMagentaLoc = glGetUniformLocation (program->programId(), "colCamaraMagenta");
+void MyGLWidget::modelTransformPatricio() {
     
+    glm::mat4 TG(1.0f);
+
+    TG = glm::translate(TG, glm::vec3(5,0,2));
+    TG = glm::translate(TG,glm::vec3(0.0 ,0.0 , 3.0 ));
+    TG = glm::rotate(TG, giro ,glm::vec3(0.0, 1.0, 0.0));
+    TG = glm::translate (TG, glm::vec3(0.0 , 0.0 , -3.0 ));
+    TG = glm::scale(TG, glm::vec3(escala, escala, escala));
+    TG = glm::translate(TG, -centreBasePatr);
+
+    glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+    
+}
+
+
+void MyGLWidget::initializeGL() {
+    
+    LL4GLWidget::initializeGL();
+
+    posCamaraLoc = glGetUniformLocation (program->programId(), "posCamara");
+    colCamaraLoc = glGetUniformLocation (program->programId(), "colCamara");
+
     posFocoPatricioLoc = glGetUniformLocation (program->programId(), "posFocoPatricio");
     colFocoPatricioLoc = glGetUniformLocation (program->programId(), "colFocoPatricio");
-    
+
     posFocoEscenaLoc = glGetUniformLocation (program->programId(), "posFocoEscena");
     colFocoEscenaLoc = glGetUniformLocation (program->programId(), "colFocoEscena");
 
+    ctrlC = ctrlP = ctrlE = true;
+    giro = 0;
 
+    centroGiro = glm::vec3 (5.0 , 3.0 , 5.0 );
+    posCamara = glm::vec3 (0.0 , 0.0 , 0.0);
+    posFocoE = glm::vec3 (10.0 , 3.0 , 5.0);
+    posFocoP = glm::vec3 (5.0 , 3.0 , 2.0 );
 
-
-  ctrlC = ctrlP = ctrlE = true;
-  giro = 0;
-
-  centroGiro = glm::vec3 (5.0 , 3.0 , 5.0 );
-  posCamara = glm::vec3 (0.0 , 0.0 , 0.0);
-  posFocoE = glm::vec3 (10.0 , 3.0 , 5.0);
-  posFocoP = glm::vec3 (5.0 , 3.0 , 2.0 );
-
-  changeCamara();
-  changeFocoE();
-  changeFocoP();
+    updateCamara();
+    updateFocoE();
+    updateFocoP();
   
 }
-void MyGLWidget::changeCamara(){
+void MyGLWidget::updateCamara() {
 
-  glm::vec3 posCamaraMagenta = posCamara;
-  glUniform3fv(posCamaraMagentaLoc, 1, &posCamaraMagenta[0]);
-
-  // si no esta apagado mando el color normal
-  if( ctrlC ) colCamara  = glm::vec3(0.9 , 0.0 , 0.9);
-  else colCamara  = glm::vec3(0.0 , 0.0 , 0.0);
+    glm::vec3 posCamara = posCamara;
+    glUniform3fv(posCamaraLoc, 1, &posCamara[0]);
     
-  glUniform3fv(colCamaraMagentaLoc, 1, &colCamara[0]);
+    if(ctrlC) colCamara  = glm::vec3(0.9 , 0.0 , 0.9);
+    else colCamara  = glm::vec3(0.0 , 0.0 , 0.0);
+
+    glUniform3fv(colCamaraLoc, 1, &colCamara[0]);
   
 }
 
-void MyGLWidget::changeFocoE(){
-
-
-  glm::vec3 posFocoEscena = View * glm::vec4(posFocoE,1.0);
-  glUniform3fv(posFocoEscenaLoc, 1, &posFocoEscena[0]);
-
-  // si no esta apagado mando el color normal
-  if( ctrlE) colFocoE  = glm::vec3(0.9 , 0.9 , 0.9);
-  else colFocoE  = glm::vec3(0.0 , 0.0 , 0.0);
+void MyGLWidget::updateFocoP() {
     
-  glUniform3fv(colFocoEscenaLoc, 1, &colFocoE[0]);
+    posFocoP.x = centroGiro.x - cos(giro-glm::radians(90.0f))*3.0f;
+    posFocoP.y = centroGiro.y ;
+    posFocoP.z = centroGiro.z + sin(giro-glm::radians(90.0f))*3.0f;
+    
+    glm::vec3 posEscenaPatricio =  View * glm::vec4(posFocoP,1.0);
+    glUniform3fv(posFocoPatricioLoc, 1, &posEscenaPatricio[0]);
+    
+    if(ctrlP) colFocoP  = glm::vec3(0.9 , 0.9 , 0.2);
+    else colFocoP  = glm::vec3(0.0 , 0.0 , 0.0);
+
+    glUniform3fv(colFocoPatricioLoc, 1, &colFocoP[0]);
+  
+}
+
+void MyGLWidget::updateFocoE() {
+    glm::vec3 posFocoEscena = View * glm::vec4(posFocoE,1.0);
+    glUniform3fv(posFocoEscenaLoc, 1, &posFocoEscena[0]);
+    
+    if(ctrlE) colFocoE  = glm::vec3(0.9 , 0.9 , 0.9);
+    else colFocoE  = glm::vec3(0.0 , 0.0 , 0.0);
+
+    glUniform3fv(colFocoEscenaLoc, 1, &colFocoE[0]);
   
 }
 
 
-void MyGLWidget::changeFocoP(){
-  // conseguir la pos del foco segun patricio;
-  // la posicion y nunca varia
-  // la pos x y z se calcula usando el centro (5,3,5):
-    //visto desde el centro el angulo 0 corresponderia al fasor 90 de nuestra imagen
-    // por tanto se resta al angulo -90 para que el 0 de la imagen corresponda a un fasor 0
-    
-  posFocoP.x = centroGiro.x - cos(giro-glm::radians(90.0f))*3.0f;
-  posFocoP.y = centroGiro.y ;
-  posFocoP.z = centroGiro.z + sin(giro-glm::radians(90.0f))*3.0f;
 
-  glm::vec3 posEscenaPatricio =  View * glm::vec4(posFocoP,1.0);
-  glUniform3fv(posFocoPatricioLoc, 1, &posEscenaPatricio[0]);
-
-  // si no esta apagado mando el color normal
-  if( ctrlP ) colFocoP  = glm::vec3(0.9 , 0.9 , 0.2);
-  else colFocoP  = glm::vec3(0.0 , 0.0 , 0.0);
-    
-  glUniform3fv(colFocoPatricioLoc, 1, &colFocoP[0]);
-  
-}
 
