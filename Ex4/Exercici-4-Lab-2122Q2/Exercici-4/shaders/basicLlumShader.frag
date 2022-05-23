@@ -67,33 +67,31 @@ vec3 Especular (vec3 NormSCO, vec3 L, vec3 vertSCO, vec3 colFocus)
 void main()
 {
     
-    vec3 Lcam = posCamara - fvertex;
-      Lcam = normalize(Lcam);
+    vec3 L_cam_magenta = posCamara - fvertex;
+      L_cam_magenta = normalize(L_cam_magenta);
 
-      vec3 Lfoco1 = posFoco1 - fvertex;
-      Lfoco1 = normalize(Lfoco1);
+      vec3 L_foco_escena = posFoco1 - fvertex;
+      L_foco_escena = normalize(L_foco_escena);
 
 
-    vec3 Lfoco2 = posFoco2 - fvertex;
-      Lfoco2 = normalize(Lfoco2);
+    vec3 L_foco_pat = posFoco2 - fvertex;
+      L_foco_pat = normalize(L_foco_pat);
 
 
 
     vec3 NormSCO = normalize(fnormal);
 
-      //Phong camara
-      vec3 PhongC =  Difus(NormSCO,Lcam,colCamara ) + Especular (NormSCO,Lcam,fvertex,colCamara);
-    
-    //Phong patricio
-    vec3 PhongP =  Difus(NormSCO,Lfoco2,colFoco2 ) + Especular (NormSCO,Lfoco2,fvertex,colFoco2);
-    
-    //Phong escena
-    vec3 PhongE =  Difus(NormSCO,Lfoco1,colFoco1 ) + Especular (NormSCO,Lfoco1,fvertex,colFoco1);
+      //Phong1
+      vec3 Phong1 =  Difus(NormSCO,L_cam_magenta,colCamara ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamara);
 
-    
+    //Phong2
+      vec3 Phong2 =  Difus(NormSCO,L_foco_escena,colFoco1 ) + Especular (NormSCO,L_foco_escena,fvertex,colFoco1);
+
+    //Phong3
+      vec3 Phong3 =  Difus(NormSCO,L_foco_pat,colFoco2 ) + Especular (NormSCO,L_foco_pat,fvertex,colFoco2);
 
       //Phong final:
-      vec3 Phong = Ambient() + PhongC + PhongP + PhongE;
+      vec3 Phong = Ambient() + Phong1 + Phong2 + Phong3;
 
       FragColor = vec4(Phong,1);
 }
