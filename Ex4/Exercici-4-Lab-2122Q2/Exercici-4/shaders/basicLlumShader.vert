@@ -21,9 +21,8 @@ out vec3  fnormal;
 
 
 void main()
-{	
+{
     
-
     mat3 NormalMatrix = inverse(transpose(mat3(View * TG)));
     fnormal = ( NormalMatrix * normal);
 
@@ -33,7 +32,6 @@ void main()
     fmatdiff = matdiff;
     fmatspec = matspec;
     fmatshin = matshin;
-
 
     gl_Position = Proj * View * TG * vec4 (vertex, 1.0);
 }

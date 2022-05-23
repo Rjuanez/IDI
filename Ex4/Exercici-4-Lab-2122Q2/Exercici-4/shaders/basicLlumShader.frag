@@ -8,11 +8,9 @@ uniform vec3 colCamara;
 uniform vec3 posFocoPatricio;
 uniform vec3 colFocoPatricio;
 
+//Escena
 uniform vec3 posFocoEscena;
 uniform vec3 colFocoEscena;
-
-
-
 
 in vec3  fmatamb;
 in vec3  fmatdiff;
