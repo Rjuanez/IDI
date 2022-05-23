@@ -63,28 +63,28 @@ vec3 Especular (vec3 NormSCO, vec3 L, vec3 vertSCO, vec3 colFocus)
 void main()
 {
     
-    vec3 L_cam_magenta = posCamaraMagenta - fvertex;
-      L_cam_magenta = normalize(L_cam_magenta);
+    vec3 Lcam = posCamaraMagenta - fvertex;
+      Lcam = normalize(Lcam);
 
-      vec3 L_foco_escena = posFocoEscena - fvertex;
-      L_foco_escena = normalize(L_foco_escena);
+      vec3 Lfoco1 = posFocoEscena - fvertex;
+      Lfoco1 = normalize(Lfoco1);
 
 
-    vec3 L_foco_pat = posFocoPatricio - fvertex;
-      L_foco_pat = normalize(L_foco_pat);
+    vec3 Lfoco2 = posFocoPatricio - fvertex;
+      Lfoco2 = normalize(Lfoco2);
 
 
 
     vec3 NormSCO = normalize(fnormal);
 
       //Phong Camara
-      vec3 PhongC =  Difus(NormSCO,L_cam_magenta,colCamaraMagenta ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamaraMagenta);
+      vec3 PhongC =  Difus(NormSCO,Lcam,colCamaraMagenta ) + Especular (NormSCO,Lcam,fvertex,colCamaraMagenta);
 
     //Phong Escena
-      vec3 PhongE =  Difus(NormSCO,L_foco_escena,colFocoEscena ) + Especular (NormSCO,L_foco_escena,fvertex,colFocoEscena);
+      vec3 PhongE =  Difus(NormSCO,Lfoco1,colFocoEscena ) + Especular (NormSCO,Lfoco1,fvertex,colFocoEscena);
 
     //Phong Patricio
-      vec3 PhongP =  Difus(NormSCO,L_foco_pat,colFocoPatricio ) + Especular (NormSCO,L_foco_pat,fvertex,colFocoPatricio);
+      vec3 PhongP =  Difus(NormSCO,Lfoco2,colFocoPatricio ) + Especular (NormSCO,Lfoco2,fvertex,colFocoPatricio);
 
       //Phong final:
       vec3 Phong = Ambient() + PhongC + PhongE + PhongP;
