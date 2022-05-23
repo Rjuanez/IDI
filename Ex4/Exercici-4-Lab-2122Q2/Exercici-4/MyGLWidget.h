@@ -9,6 +9,22 @@ class MyGLWidget : public LL4GLWidget {
   protected:
     virtual void mouseMoveEvent(QMouseEvent *e);
     virtual void keyPressEvent(QKeyEvent* event);
+    
+    virtual void initializeGL();
+    virtual void modelTransformPatricio();
+    
+    void changeCamara();
+    void changeFocoE();
+    void changeFocoP();
+    
+    float giro;
+    bool off1, off2, off3;
+    glm::vec3 centroGiro;
+    glm::vec3 colCamara, colFocoE,colFocoP;
+    glm::vec3 posCamara, posFocoE,posFocoP;
+    GLuint posCamaraMagentaLoc, posFocoEscenaLoc, posFocoPatricioLoc;
+    GLuint colCamaraMagentaLoc, colFocoEscenaLoc, colFocoPatricioLoc;
+    
   private:
     int printOglError(const char file[], int line, const char func[]);
 };

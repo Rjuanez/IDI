@@ -1,5 +1,16 @@
 #version 330 core
 
+
+uniform vec3 posCamaraMagenta;
+uniform vec3 colCamaraMagenta;
+
+uniform vec3 posFocoEscena;
+uniform vec3 colFocoEscena;
+
+uniform vec3 posFocoPatricio;
+uniform vec3 colFocoPatricio;
+
+
 in vec3  fmatamb;
 in vec3  fmatdiff;
 in vec3  fmatspec;
@@ -51,5 +62,32 @@ vec3 Especular (vec3 NormSCO, vec3 L, vec3 vertSCO, vec3 colFocus)
 
 void main()
 {
-    FragColor = vec4(fmatdiff, 1);
+    
+    vec3 L_cam_magenta = posCamaraMagenta - fvertex;
+      L_cam_magenta = normalize(L_cam_magenta);
+
+      vec3 L_foco_escena = posFocoEscena - fvertex;
+      L_foco_escena = normalize(L_foco_escena);
+
+
+    vec3 L_foco_pat = posFocoPatricio - fvertex;
+      L_foco_pat = normalize(L_foco_pat);
+
+
+
+    vec3 NormSCO = normalize(fnormal);
+
+      //Phong1
+      vec3 Phong1 =  Difus(NormSCO,L_cam_magenta,colCamaraMagenta ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamaraMagenta);
+
+    //Phong2
+      vec3 Phong2 =  Difus(NormSCO,L_foco_escena,colFocoEscena ) + Especular (NormSCO,L_foco_escena,fvertex,colFocoEscena);
+
+    //Phong3
+      vec3 Phong3 =  Difus(NormSCO,L_foco_pat,colFocoPatricio ) + Especular (NormSCO,L_foco_pat,fvertex,colFocoPatricio);
+
+      //Phong final:
+      vec3 Phong = Ambient() + Phong1 + Phong2 + Phong3;
+
+      FragColor = vec4(Phong,1);
 }

@@ -22,13 +22,17 @@ out vec3  fnormal;
 
 void main()
 {	
+    fvertex = (View * TG * vec4(vertex,1.0)).xyz;
+
+    mat3 NormalMatrix = inverse(transpose(mat3(View * TG)));
+    fnormal = ( NormalMatrix * normal);
+
     // Passem les dades al fragment shader
     fmatamb  = matamb;
     fmatdiff = matdiff;
     fmatspec = matspec;
     fmatshin = matshin;
-    fvertex = vertex; // CALCULEU CORRECTAMENT
-    fnormal = normal; // CALCULEU CORRECTAMENT
+
 
     gl_Position = Proj * View * TG * vec4 (vertex, 1.0);
 }
