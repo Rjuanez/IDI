@@ -14,11 +14,6 @@ class MyGLWidget : public LL4GLWidget {
     void updateCamara();
     void updateFocoE();
     void updateFocoP();
-    
-    
-    
-  private:
-    int printOglError(const char file[], int line, const char func[]);
     float giro;
     bool ctrlC, ctrlP, ctrlE;
     glm::vec3 centroGiro;
@@ -26,4 +21,9 @@ class MyGLWidget : public LL4GLWidget {
     glm::vec3 posCamara, posFocoE,posFocoP;
     GLuint posCamaraLoc, posFocoEscenaLoc, posFocoPatricioLoc;
     GLuint colCamaraLoc, colFocoEscenaLoc, colFocoPatricioLoc;
+    
+    
+  private:
+    int printOglError(const char file[], int line, const char func[]);
+    
 };
