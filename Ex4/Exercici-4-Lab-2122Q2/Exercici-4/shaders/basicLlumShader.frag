@@ -77,17 +77,17 @@ void main()
 
     vec3 NormSCO = normalize(fnormal);
 
-      //Phong1
-      vec3 Phong1 =  Difus(NormSCO,L_cam_magenta,colCamaraMagenta ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamaraMagenta);
+      //Phong Camara
+      vec3 PhongC =  Difus(NormSCO,L_cam_magenta,colCamaraMagenta ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamaraMagenta);
 
-    //Phong2
-      vec3 Phong2 =  Difus(NormSCO,L_foco_escena,colFocoEscena ) + Especular (NormSCO,L_foco_escena,fvertex,colFocoEscena);
+    //Phong Escena
+      vec3 PhongE =  Difus(NormSCO,L_foco_escena,colFocoEscena ) + Especular (NormSCO,L_foco_escena,fvertex,colFocoEscena);
 
-    //Phong3
-      vec3 Phong3 =  Difus(NormSCO,L_foco_pat,colFocoPatricio ) + Especular (NormSCO,L_foco_pat,fvertex,colFocoPatricio);
+    //Phong Patricio
+      vec3 PhongP =  Difus(NormSCO,L_foco_pat,colFocoPatricio ) + Especular (NormSCO,L_foco_pat,fvertex,colFocoPatricio);
 
       //Phong final:
-      vec3 Phong = Ambient() + Phong1 + Phong2 + Phong3;
+      vec3 Phong = Ambient() + PhongC + PhongE + PhongP;
 
       FragColor = vec4(Phong,1);
 }
