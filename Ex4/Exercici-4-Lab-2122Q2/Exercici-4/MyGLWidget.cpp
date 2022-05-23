@@ -143,7 +143,6 @@ void MyGLWidget::initializeGL() {
   
 }
 void MyGLWidget::updateCamara() {
-
     glUniform3fv(posCamaraLoc, 1, &posCamara[0]);
     
     if(ctrlC) colCamara  = glm::vec3(0.9 , 0.0 , 0.9);

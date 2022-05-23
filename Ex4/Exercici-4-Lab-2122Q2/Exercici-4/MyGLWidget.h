@@ -11,19 +11,22 @@ class MyGLWidget : public LL4GLWidget {
     virtual void keyPressEvent(QKeyEvent* event);
     virtual void initializeGL();
     virtual void modelTransformPatricio();
+    
+    
+    
+  private:
+    int printOglError(const char file[], int line, const char func[]);
     void updateCamara();
     void updateFocoE();
     void updateFocoP();
+    
     float giro;
     bool ctrlC, ctrlP, ctrlE;
+    
+    
     glm::vec3 centroGiro;
     glm::vec3 colCamara, colFocoE,colFocoP;
     glm::vec3 posCamara, posFocoE,posFocoP;
     GLuint posCamaraLoc, posFocoEscenaLoc, posFocoPatricioLoc;
     GLuint colCamaraLoc, colFocoEscenaLoc, colFocoPatricioLoc;
-    
-    
-  private:
-    int printOglError(const char file[], int line, const char func[]);
-    
 };
