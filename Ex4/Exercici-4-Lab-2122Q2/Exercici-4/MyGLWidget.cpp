@@ -83,13 +83,13 @@ void MyGLWidget::keyPressEvent(QKeyEvent* event) {
     break;
     }
     case Qt::Key_Right: {
-        giro -= glm::radians(45.0f);
+        giro -= M_PI/6;
         modelTransformPatricio();
         updateFocoP();
     break;
     }
     case Qt::Key_Left: {
-        giro += glm::radians(45.0f);
+        giro += M_PI/6;
         modelTransformPatricio();
         updateFocoP();
     break;
