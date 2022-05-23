@@ -1,18 +1,14 @@
 #version 330 core
 
 
-uniform vec3 posCamara;
-uniform vec3 colCamara;
+uniform vec3 posCamaraMagenta;
+uniform vec3 colCamaraMagenta;
 
-//Patricio
-uniform vec3 posFoco2;
-uniform vec3 colFoco2;
+uniform vec3 posFocoEscena;
+uniform vec3 colFocoEscena;
 
-//Escena
-uniform vec3 posFoco1;
-uniform vec3 colFoco1;
-
-
+uniform vec3 posFocoPatricio;
+uniform vec3 colFocoPatricio;
 
 
 in vec3  fmatamb;
@@ -67,14 +63,14 @@ vec3 Especular (vec3 NormSCO, vec3 L, vec3 vertSCO, vec3 colFocus)
 void main()
 {
     
-    vec3 L_cam_magenta = posCamara - fvertex;
+    vec3 L_cam_magenta = posCamaraMagenta - fvertex;
       L_cam_magenta = normalize(L_cam_magenta);
 
-      vec3 L_foco_escena = posFoco1 - fvertex;
+      vec3 L_foco_escena = posFocoEscena - fvertex;
       L_foco_escena = normalize(L_foco_escena);
 
 
-    vec3 L_foco_pat = posFoco2 - fvertex;
+    vec3 L_foco_pat = posFocoPatricio - fvertex;
       L_foco_pat = normalize(L_foco_pat);
 
 
@@ -82,13 +78,13 @@ void main()
     vec3 NormSCO = normalize(fnormal);
 
       //Phong1
-      vec3 Phong1 =  Difus(NormSCO,L_cam_magenta,colCamara ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamara);
+      vec3 Phong1 =  Difus(NormSCO,L_cam_magenta,colCamaraMagenta ) + Especular (NormSCO,L_cam_magenta,fvertex,colCamaraMagenta);
 
     //Phong2
-      vec3 Phong2 =  Difus(NormSCO,L_foco_escena,colFoco1 ) + Especular (NormSCO,L_foco_escena,fvertex,colFoco1);
+      vec3 Phong2 =  Difus(NormSCO,L_foco_escena,colFocoEscena ) + Especular (NormSCO,L_foco_escena,fvertex,colFocoEscena);
 
     //Phong3
-      vec3 Phong3 =  Difus(NormSCO,L_foco_pat,colFoco2 ) + Especular (NormSCO,L_foco_pat,fvertex,colFoco2);
+      vec3 Phong3 =  Difus(NormSCO,L_foco_pat,colFocoPatricio ) + Especular (NormSCO,L_foco_pat,fvertex,colFocoPatricio);
 
       //Phong final:
       vec3 Phong = Ambient() + Phong1 + Phong2 + Phong3;
