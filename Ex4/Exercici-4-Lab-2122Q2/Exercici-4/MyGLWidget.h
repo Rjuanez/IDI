@@ -18,7 +18,7 @@ class MyGLWidget : public LL4GLWidget {
     void changeFocoP();
     
     float giro;
-    bool off1, off2, off3;
+    bool ctrlC, ctrlP, ctrlE;
     glm::vec3 centroGiro;
     glm::vec3 colCamara, colFocoE,colFocoP;
     glm::vec3 posCamara, posFocoE,posFocoP;
